@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Processor Pro - Tối Ưu Hóa Chuỗi Ký Tự</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="image/logo.png">
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Xử Lý & Tối Ưu Hóa Chuỗi Ký Tự</h1>
+
+        <div class="input-group">
+            <label for="inputText">Nhập chuỗi ký tự cần xử lý:</label>
+            <textarea id="inputText" rows="4" placeholder='Ví dụ: Hello "World" and \'JavaScript\' with special@#$% chars...'></textarea>
+        </div>
+        
+        <div class="method-buttons">
+            <button onclick="removeQuotesMethod1()">Xóa Tất Cả Dấu Nháy</button>
+            <button onclick="removeQuotesMethod2()">Xóa Chỉ Dấu Nháy Kép</button>
+            <button onclick="removeQuotesMethod3()">Xóa Chỉ Dấu Nháy Đơn</button>
+        </div>
+        
+        <div class="method-buttons">
+            <button onclick="removeSpecialMethod()">Xóa Ký Tự Đặc Biệt</button>
+            <button onclick="removeTrailingPeriodsMethod()">Xóa Dấu Chấm Cuối</button>
+            <button onclick="removeAllPeriodsMethod()">Xóa Tất Cả Dấu Chấm</button>
+        </div>
+        
+        <div class="method-buttons">
+            <button onclick="cleanupMethod()" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">🚀 Dọn Dẹp Hoàn Toàn</button>
+            <button onclick="clearAll()" style="background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);">🗑️ Xóa Tất Cả</button>
+        </div>
+        
+        <div class="result-section">
+            <div class="result-header">
+                <label>Kết quả:</label>
+                <button id="copyButton" class="copy-button" onclick="copyToClipboard()">
+                    📋 Sao chép
+                </button>
+            </div>
+            <textarea id="resultText" rows="4" readonly></textarea>
+        </div>
+        
+        <div class="example-section">
+            <h3>📝 Các phương pháp xử lý:</h3>
+            
+            <h4>🔤 Xử lý dấu nháy:</h4>
+            <p><strong>1. Xóa tất cả dấu nháy:</strong> Loại bỏ cả dấu nháy đơn và kép (ASCII + Unicode)</p>
+            <p><strong>2. Xóa chỉ dấu nháy kép:</strong> Chỉ loại bỏ <code>"</code> <code>"</code> <code>"</code></p>
+            <p><strong>3. Xóa chỉ dấu nháy đơn:</strong> Chỉ loại bỏ <code>'</code> <code>'</code> <code>'</code></p>
+            
+            <h4>🧹 Xử lý ký tự đặc biệt:</h4>
+            <p><strong>4. Xóa ký tự đặc biệt:</strong> Giữ lại chữ cái, số, khoảng trắng</p>
+            <p><strong>5. Xóa dấu chấm cuối:</strong> Loại bỏ tất cả dấu <code>.</code> ở cuối chuỗi</p>
+            <p><strong>6. Xóa tất cả dấu chấm:</strong> Loại bỏ mọi dấu <code>.</code> trong chuỗi</p>
+            
+            <h4>🚀 Dọn dẹp hoàn toàn (Khuyến nghị):</h4>
+            <p><strong>• Kết hợp tất cả:</strong> Xóa dấu nháy + ký tự đặc biệt + dấu chấm cuối + chuẩn hóa khoảng trắng</p>
+            
+            <h4>📋 Tính năng sao chép:</h4>
+            <p><strong>• Nhấn nút "📋 Sao chép"</strong> để copy kết quả vào clipboard</p>
+            <p><strong>• Double-click vào kết quả</strong> để sao chép nhanh</p>
+            <p><strong>• Ctrl+C</strong> khi đang focus vào ô kết quả</p>
+            
+            <h4>🔧 Các loại dấu nháy được hỗ trợ:</h4>
+            <div style="background: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 8px; font-family: monospace;">
+                <strong>ASCII Quotes:</strong><br>
+                • Dấu nháy kép: " (U+0022)<br>
+                • Dấu nháy đơn: ' (U+0027)<br><br>
+                
+                <strong>Unicode/Smart Quotes:</strong><br>
+                • Dấu nháy kép: " " (U+201C, U+201D)<br>
+                • Dấu nháy đơn: ' ' (U+2018, U+2019)<br>
+                • Angle quotes: « » ‹ › và nhiều loại khác...
+            </div>
+            
+            <h4>💡 Ví dụ:</h4>
+            <p><strong>Input:</strong> <code>Hello "World"! @#$% and 'test' with dots...</code></p>
+            <p><strong>Output (dọn dẹp):</strong> <code>Hello World and test with dots</code></p>
+        </div>
+        
+        <div class="footer">
+            <h3>🚀 Text Processor Pro</h3>
+            <div class="developer">
+                👨‍💻 Developed by <strong>Tien Dat</strong>
+            </div>
+            <p>Công cụ xử lý và tối ưu hóa chuỗi ký tự chuyên nghiệp</p>
+            <div class="features">
+                <span class="feature-tag">🔤 25+ Unicode Quotes</span>
+                <span class="feature-tag">🧹 Smart Cleanup</span>
+                <span class="feature-tag">📋 One-Click Copy</span>
+                <span class="feature-tag">⚡ Real-time Processing</span>
+            </div>
+            <p class="version">Version 2.0 - September 2025</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

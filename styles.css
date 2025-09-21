@@ -1,0 +1,231 @@
+/* ===========================================
+   Text Processor Pro - Styles
+   Developer: Tien Dat
+   Version: 2.0 - September 2025
+   =========================================== */
+
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Container */
+.container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Typography */
+h1 {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+/* Form Elements */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+textarea, input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+textarea:focus, input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin: 10px 5px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.method-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Result Section */
+.result-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Copy Button */
+.copy-button {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.copy-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+}
+
+.copy-button:active {
+    transform: translateY(0);
+}
+
+.copy-button.copied {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+/* Example Section */
+.example-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #edf2f7;
+    border-radius: 10px;
+}
+
+/* Code Styling */
+code {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Footer */
+.footer {
+    margin-top: 40px;
+    padding: 25px;
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.footer h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer p {
+    margin: 8px 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.footer .developer {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f7fafc;
+    margin: 10px 0;
+}
+
+.footer .version {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.footer .features {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer .feature-tag {
+    background: rgba(255,255,255,0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(10px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    button {
+        padding: 12px 20px;
+        font-size: 14px;
+        margin: 8px 3px;
+    }
+    
+    .footer .features {
+        gap: 10px;
+    }
+    
+    .footer .feature-tag {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+}
