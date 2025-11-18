@@ -36,6 +36,13 @@ h1 {
     margin-bottom: 20px;
 }
 
+.input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
 label {
     display: block;
     margin-bottom: 8px;

@@ -12,7 +12,12 @@
         <h1>🧹 Xử Lý & Tối Ưu Hóa Chuỗi Ký Tự</h1>
 
         <div class="input-group">
-            <label for="inputText">Nhập chuỗi ký tự cần xử lý:</label>
+            <div class="input-header">
+                <label for="inputText">Nhập chuỗi ký tự cần xử lý:</label>
+                <button id="copyInputButton" class="copy-button" onclick="copyInputToClipboard()">
+                    📋 Sao chép Input
+                </button>
+            </div>
             <textarea id="inputText" rows="4" placeholder='Ví dụ: Hello "World" and \'JavaScript\' with special@#$% chars...'></textarea>
             <div class="stats-container">
                 <div class="stat-item">

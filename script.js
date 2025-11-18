@@ -133,7 +133,6 @@ function updateStats() {
     const charCount = document.getElementById('charCount');
     const wordCount = document.getElementById('wordCount');
     const inputTextarea = document.getElementById('inputText');
-    const copyButton = document.getElementById('copyButton');
     const statsContainer = document.querySelector('.stats-container');
     
     // Đếm số ký tự
@@ -147,27 +146,17 @@ function updateStats() {
     charCount.textContent = charLength;
     wordCount.textContent = wordLength;
     
-    // Kiểm tra giới hạn 100 ký tự
+    // Kiểm tra giới hạn 100 ký tự (chỉ hiển thị cảnh báo, không disable)
     if (charLength > 100) {
         // Thêm class cảnh báo
         inputTextarea.classList.add('char-limit-exceeded');
         statsContainer.classList.add('warning');
         charCount.classList.add('warning-text');
-        
-        // Vô hiệu hóa nút copy
-        copyButton.disabled = true;
-        copyButton.classList.add('disabled');
-        copyButton.title = 'Không thể sao chép khi vượt quá 100 ký tự';
     } else {
         // Xóa class cảnh báo
         inputTextarea.classList.remove('char-limit-exceeded');
         statsContainer.classList.remove('warning');
         charCount.classList.remove('warning-text');
-        
-        // Kích hoạt lại nút copy
-        copyButton.disabled = false;
-        copyButton.classList.remove('disabled');
-        copyButton.title = 'Sao chép kết quả';
     }
 }
 
@@ -186,17 +175,62 @@ function displayResult(result) {
     resetCopyButton();
 }
 
+// Hàm sao chép input vào clipboard
+async function copyInputToClipboard() {
+    const inputTextarea = document.getElementById('inputText');
+    const copyInputButton = document.getElementById('copyInputButton');
+    
+    if (!inputTextarea.value.trim()) {
+        alert('Không có nội dung để sao chép!');
+        return;
+    }
+    
+    try {
+        // Sử dụng Clipboard API hiện đại
+        await navigator.clipboard.writeText(inputTextarea.value);
+        
+        // Cập nhật UI để thông báo đã sao chép
+        copyInputButton.innerHTML = '✅ Đã sao chép';
+        copyInputButton.classList.add('copied');
+        
+        // Reset sau 2 giây
+        setTimeout(() => {
+            copyInputButton.innerHTML = '📋 Sao chép Input';
+            copyInputButton.classList.remove('copied');
+        }, 2000);
+        
+        // Thêm hiệu ứng flash cho textarea
+        inputTextarea.style.backgroundColor = '#c6f6d5';
+        setTimeout(() => {
+            inputTextarea.style.backgroundColor = '#ffffff';
+        }, 500);
+        
+    } catch (err) {
+        // Fallback cho trình duyệt cũ
+        try {
+            inputTextarea.select();
+            inputTextarea.setSelectionRange(0, 99999); // Cho mobile
+            document.execCommand('copy');
+            
+            copyInputButton.innerHTML = '✅ Đã sao chép';
+            copyInputButton.classList.add('copied');
+            
+            setTimeout(() => {
+                copyInputButton.innerHTML = '📋 Sao chép Input';
+                copyInputButton.classList.remove('copied');
+            }, 2000);
+            
+        } catch (fallbackErr) {
+            alert('Không thể sao chép tự động. Vui lòng sao chép thủ công!');
+            inputTextarea.select();
+        }
+    }
+}
+
 // Hàm sao chép kết quả vào clipboard
 async function copyToClipboard() {
     const resultTextarea = document.getElementById('resultText');
     const copyButton = document.getElementById('copyButton');
-    const inputText = document.getElementById('inputText').value;
-    
-    // Kiểm tra giới hạn ký tự
-    if (inputText.length > 100) {
-        alert('⚠️ Không thể sao chép! Vui lòng nhập tối đa 100 ký tự.');
-        return;
-    }
     
     if (!resultTextarea.value.trim()) {
         alert('Không có nội dung để sao chép!');
