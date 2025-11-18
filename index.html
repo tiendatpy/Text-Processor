@@ -14,23 +14,28 @@
         <div class="input-group">
             <label for="inputText">Nhập chuỗi ký tự cần xử lý:</label>
             <textarea id="inputText" rows="4" placeholder='Ví dụ: Hello "World" and \'JavaScript\' with special@#$% chars...'></textarea>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-icon">🔤</span>
+                    <span class="stat-label">Số ký tự:</span>
+                    <span class="stat-value" id="charCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">📝</span>
+                    <span class="stat-label">Số từ:</span>
+                    <span class="stat-value" id="wordCount">0</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="method-buttons">
-            <button onclick="removeQuotesMethod1()">Xóa Tất Cả Dấu Nháy</button>
-            <button onclick="removeQuotesMethod2()">Xóa Chỉ Dấu Nháy Kép</button>
-            <button onclick="removeQuotesMethod3()">Xóa Chỉ Dấu Nháy Đơn</button>
-        </div>
-        
-        <div class="method-buttons">
-            <button onclick="removeSpecialMethod()">Xóa Ký Tự Đặc Biệt</button>
-            <button onclick="removeTrailingPeriodsMethod()">Xóa Dấu Chấm Cuối</button>
-            <button onclick="removeAllPeriodsMethod()">Xóa Tất Cả Dấu Chấm</button>
-        </div>
-        
-        <div class="method-buttons">
-            <button onclick="cleanupMethod()" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">🚀 Dọn Dẹp Hoàn Toàn</button>
-            <button onclick="clearAll()" style="background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);">🗑️ Xóa Tất Cả</button>
+        <div class="wrap-method-buttons">
+            <div class="method-buttons">
+                <button onclick="convertToLowerCaseMethod()" style="background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);">🔤 Chuyển Chữ Thường</button>
+            </div>
+            
+            <div class="method-buttons">
+                <button onclick="cleanupMethod()" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">🚀 Dọn Dẹp Hoàn Toàn</button>
+                <button onclick="clearAll()" style="background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);">🗑️ Xóa Tất Cả</button>
+            </div>
         </div>
         
         <div class="result-section">
@@ -56,6 +61,9 @@
             <p><strong>5. Xóa dấu chấm cuối:</strong> Loại bỏ tất cả dấu <code>.</code> ở cuối chuỗi</p>
             <p><strong>6. Xóa tất cả dấu chấm:</strong> Loại bỏ mọi dấu <code>.</code> trong chuỗi</p>
             
+            <h4>🔤 Chuyển đổi chữ:</h4>
+            <p><strong>7. Chuyển chữ thường:</strong> Chuyển tất cả ký tự thành chữ thường (lowercase)</p>
+            
             <h4>🚀 Dọn dẹp hoàn toàn (Khuyến nghị):</h4>
             <p><strong>• Kết hợp tất cả:</strong> Xóa dấu nháy + ký tự đặc biệt + dấu chấm cuối + chuẩn hóa khoảng trắng</p>
             
@@ -79,6 +87,7 @@
             <h4>💡 Ví dụ:</h4>
             <p><strong>Input:</strong> <code>Hello "World"! @#$% and 'test' with dots...</code></p>
             <p><strong>Output (dọn dẹp):</strong> <code>Hello World and test with dots</code></p>
+            <p><strong>Output (chữ thường):</strong> <code>hello "world"! @#$% and 'test' with dots...</code></p>
         </div>
         
         <div class="footer">

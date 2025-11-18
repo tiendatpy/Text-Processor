@@ -57,6 +57,11 @@ function cleanupText(str) {
         .trim(); // Xóa khoảng trắng đầu cuối
 }
 
+// Phương pháp 13: Chuyển tất cả thành chữ thường
+function convertToLowerCase(str) {
+    return str.toLowerCase();
+}
+
 // Phương pháp 4: Xóa dấu nháy sử dụng split và join (bao gồm tất cả Unicode)
 function removeQuotesWithSplit(str) {
     // List tất cả các ký tự dấu nháy cần xóa
@@ -122,6 +127,50 @@ function removeQuotesWithFilter(str) {
     return str.split('').filter(char => !quotesToRemove.includes(char)).join('');
 }
 
+// Hàm cập nhật thống kê ký tự và từ
+function updateStats() {
+    const inputText = document.getElementById('inputText').value;
+    const charCount = document.getElementById('charCount');
+    const wordCount = document.getElementById('wordCount');
+    const inputTextarea = document.getElementById('inputText');
+    const copyButton = document.getElementById('copyButton');
+    const statsContainer = document.querySelector('.stats-container');
+    
+    // Đếm số ký tự
+    const charLength = inputText.length;
+    
+    // Đếm số từ (loại bỏ khoảng trắng thừa và đếm)
+    const words = inputText.trim().split(/\s+/);
+    const wordLength = inputText.trim() === '' ? 0 : words.length;
+    
+    // Cập nhật UI
+    charCount.textContent = charLength;
+    wordCount.textContent = wordLength;
+    
+    // Kiểm tra giới hạn 100 ký tự
+    if (charLength > 100) {
+        // Thêm class cảnh báo
+        inputTextarea.classList.add('char-limit-exceeded');
+        statsContainer.classList.add('warning');
+        charCount.classList.add('warning-text');
+        
+        // Vô hiệu hóa nút copy
+        copyButton.disabled = true;
+        copyButton.classList.add('disabled');
+        copyButton.title = 'Không thể sao chép khi vượt quá 100 ký tự';
+    } else {
+        // Xóa class cảnh báo
+        inputTextarea.classList.remove('char-limit-exceeded');
+        statsContainer.classList.remove('warning');
+        charCount.classList.remove('warning-text');
+        
+        // Kích hoạt lại nút copy
+        copyButton.disabled = false;
+        copyButton.classList.remove('disabled');
+        copyButton.title = 'Sao chép kết quả';
+    }
+}
+
 // Hàm hiển thị kết quả lên giao diện
 function displayResult(result) {
     const resultTextarea = document.getElementById('resultText');
@@ -141,6 +190,13 @@ function displayResult(result) {
 async function copyToClipboard() {
     const resultTextarea = document.getElementById('resultText');
     const copyButton = document.getElementById('copyButton');
+    const inputText = document.getElementById('inputText').value;
+    
+    // Kiểm tra giới hạn ký tự
+    if (inputText.length > 100) {
+        alert('⚠️ Không thể sao chép! Vui lòng nhập tối đa 100 ký tự.');
+        return;
+    }
     
     if (!resultTextarea.value.trim()) {
         alert('Không có nội dung để sao chép!');
@@ -307,6 +363,22 @@ function cleanupMethod() {
     console.log('Output:', result);
 }
 
+// Hàm xử lý chuyển chữ thường
+function convertToLowerCaseMethod() {
+    const inputText = document.getElementById('inputText').value;
+    if (!inputText.trim()) {
+        alert('Vui lòng nhập chuỗi cần xử lý!');
+        return;
+    }
+    
+    const result = convertToLowerCase(inputText);
+    displayResult(result);
+    
+    console.log('Chuyển thành chữ thường:');
+    console.log('Input:', inputText);
+    console.log('Output:', result);
+}
+
 // Hàm xóa tất cả nội dung
 function clearAll() {
     document.getElementById('inputText').value = '';
@@ -386,6 +458,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputText = document.getElementById('inputText');
     const resultText = document.getElementById('resultText');
     
+    // Cập nhật stats khi người dùng nhập
+    inputText.addEventListener('input', updateStats);
+    
     inputText.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -438,6 +513,7 @@ if (typeof module !== 'undefined' && module.exports) {
         removeSpecialAndTrailingPeriods,
         removeAll,
         cleanupText,
+        convertToLowerCase,
         
         // UI utilities
         copyToClipboard,
